@@ -27,14 +27,14 @@ class enumerable:
     def toSet(self) -> set:
         return set(self.__lst)
 
-    def toDict(self, callback: function) -> dict:
+    def toDict(self, callback) -> dict:
         return {callback(item): item for item in self.__lst}
 
-    def select(self, callback: function):
+    def select(self, callback):
         self.__lst = [callback(item) for item in self.__lst]
         return self
 
-    def where(self, callback: function):
+    def where(self, callback):
         self.__lst = [item for item in self.__lst if callback(item)]
         return self
 
@@ -53,7 +53,7 @@ class enumerable:
     def first(self):
         return self.__lst[0]
 
-    def firstCall(self, callback: function):
+    def firstCall(self, callback):
         for item in self.__lst:
             if callback(item):
                 return item
@@ -62,7 +62,7 @@ class enumerable:
     def last(self):
         return self.__lst[len(self.__lst)-1]
 
-    def lastCall(self, callback: function):
+    def lastCall(self, callback):
         for item in reversed(self.__lst):
             if callback(item):
                 return item
@@ -75,28 +75,28 @@ class enumerable:
     def count(self) -> int:
         return len(self.__lst)
 
-    def countCall(self, callback: function) -> int:
+    def countCall(self, callback) -> int:
         i = 0
         for item in self.__lst:
             if callback(item):
                 i += 1
         return i
 
-    def any(self, callback: function) -> bool:
+    def any(self, callback) -> bool:
         flag = False
         for item in self.__lst:
             if callback(item):
                 flag = True
         return flag
 
-    def all(self, callback: function) -> bool:
+    def all(self, callback) -> bool:
         flag = True
         for item in self.__lst:
             if not callback(item):
                 flag = False
         return flag
 
-    def orderBy(self, callback: function):
+    def orderBy(self, callback):
         self.__lst.sort(key=callback)
         return self
 
