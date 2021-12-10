@@ -1,16 +1,16 @@
 import copy
 
+# python向けC#LINQ風ライブラリ(自作)
 # ミュータブル(変更可能)オブジェクトだが、コンストラクタ実行時にcopy.deepcopy()される
 
-
-class enumerable:
+class Enumerable:
     __lst: list = None
 
     def __init__(self, obj) -> None:
         if isinstance(obj, list) or isinstance(obj, tuple):
             self.__lst = list(copy.deepcopy(obj))
         else:
-            raise TypeError('■ WARNING: object is not list or tuple.')
+            raise TypeError('■ WARNING: Object is not list or tuple.')
 
     def print(self) -> None:
         print(self.__lst)
@@ -103,3 +103,9 @@ class enumerable:
     def reverse(self):
         self.__lst.reverse()
         return self
+
+    def merge(self, enumerable):
+        return Enumerable(self.__lst + enumerable.toList())
+
+    def deepcopy(self):
+        return copy.deepcopy(self)
